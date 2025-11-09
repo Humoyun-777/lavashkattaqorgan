@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavash (Kattaqo'rg'on) - Ma'lumot</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 700px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* --- Header / Titul --- */
+        .header {
+            background-color: #ff5722; /* To'q sariq rang */
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            letter-spacing: 0.5px;
+        }
+        
+        .header p {
+            margin: 5px 0 0;
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        /* --- Content Sections --- */
+        .content {
+            padding: 30px;
+        }
+
+        .section-title {
+            color: #ff5722;
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ffccbc;
+            padding-bottom: 5px;
+            font-weight: 600;
+        }
+
+        /* --- Cards / Bloklar --- */
+        .info-card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background-color: #fff3e0; /* Ochiq to'q sariq fon */
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #ff9800; /* Asosiy rang */
+        }
+
+        .info-card strong {
+            display: block;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .info-card p {
+            margin: 0;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        /* --- List Styles (Menu) --- */
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-list li {
+            background: #fcfcfc;
+            border: 1px solid #eee;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            position: relative;
+            padding-left: 40px;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        .menu-list li strong {
+            color: #333;
+            display: block;
+            font-size: 1.05em;
+            margin-bottom: 3px;
+        }
+
+        .menu-list li::before {
+            content: '⭐';
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+        }
+        
+        /* --- Footer --- */
+        .footer {
+            text-align: center;
+            padding: 15px 30px;
+            border-top: 1px solid #eee;
+            font-size: 0.85em;
+            color: #777;
+            background-color: #fafafa;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 600px) {
+            .info-card-grid {
+                grid-template-columns: 1fr;
+            }
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div style="background-color: green;" class="main-container">
+    <div style="background-color: lightgreen;" class="header">
+         <h1 style="color: red;"><a style="text-decoration: none; color: black;" href="index.html">← Orqaga</a></h1>
+         <br>
+        <h1>🌯 Lavash (Kattaqorg‘on) Fast-Food Nuqtasi</h1>
+        <p>Shaharning markaziy hududiga yaqin joylashgan tez xizmat ko‘rsatish nuqtasi</p>
+    </div>
+
+    <div class="content">
+
+        <div class="info-card-grid">
+            <div class="info-card">
+                <strong>📍 Manzil</strong>
+                <p>Kattaqo‘rg‘on shahri, markaziy yo‘lga yaqin hudud. Wolt orqali ham buyurtma qabul qilinadi.</p>
+            </div>
+            <div class="info-card">
+                <strong>⏳ Xizmat Tezligi</strong>
+                <p>Buyurtmalar 5–10 daqiqa ichida tayyorlanadi. Oshpazlar ochiq joyda ishlaydi.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">💰 Narx Oralig‘i</h2>
+        <ul class="menu-list">
+            <li>
+                <strong>Katta Lavash:</strong> 25–35 ming so‘m atrofida.
+            </li>
+            <li>
+                <strong>Kichik Lavash:</strong> 18–25 ming so‘m oralig‘ida.
+            </li>
+            <li>
+                <strong>Shourma:</strong> Narxi biroz qimmatroq, ammo hajmi kattaroq bo'ladi.
+            </li>
+        </ul>
+
+        <h2 class="section-title">📋 Taomlar Assortimenti</h2>
+        <ul class="menu-list">
+            <li>
+                <strong>Lavash standart:</strong> Go‘sht, salat, pomidor, bodring, kartoshka fri va maxsus sous.
+            </li>
+            <li>
+                <strong>Lavash pishloqli:</strong> Yuqoridagi tarkibga pishloq ham qo‘shiladi.
+            </li>
+            <li>
+                <strong>Shourma (Katta va Kichik):</strong> Tovuq yoki mol go‘shti, sabzavotlar va souslardan iborat.
+            </li>
+            <li>
+                <strong>Qo‘shimchalar:</strong> Kartoshka fri, turli xil souslar, ichimliklar (cola, fanta, suv).
+            </li>
+        </ul>
+        
+        <h2 class="section-title">👨‍👩‍👧‍👦 Atmosfera va Mijozlar</h2>
+        <p style="color: white;">
+            Joy **oddiy, ammo toza va qulay**. Stol-stullar tashqarida ham, ichkarida ham o‘rnatilgan. Ko‘p hollarda o‘quvchilar, talabalar va kechki payt ovqatlanishga chiqqan yoshlar bu joyni tanlaydi.
+        </p>
+    </div>
+
+    <div class="footer">
+        © 2025 Ma'lumot manbai: Tashqi taqdim etilgan hujjat.
+    </div>
+</div>
+
+</body>
+</html>

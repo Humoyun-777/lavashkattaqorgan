@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bizning Manzil | LAVASH.UZ</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="b99ed160-73e4-4fe9-a2d8-e56a8ee27b8a_removalai_preview.png"> 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* LAVASH.UZ brendiga mos ranglar */
+        :root {
+            --primary-color: #4CAF50; /* Asosiy yashil rang */
+            --secondary-color: #388E3C; /* To'q yashil/brend rangi */
+            --accent-color: #f8f9fa;
+            --text-color: #333;
+            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, #FF9800, #F44336); /* To'q sariq/qizil (oziq-ovqat/lavashga mos) */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f5f5;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* QR Code Section */
+        .qr-section {
+            padding: 60px 0;
+            background: var(--accent-color);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--secondary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .qr-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .qr-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .qr-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .qr-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .qr-image-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .qr-card img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 0;
+            transition: all 0.3s ease;
+            border: 3px solid #f0f0f0;
+        }
+
+        .qr-card:hover img {
+            transform: scale(1.05);
+            border-color: var(--primary-color);
+        }
+
+        .qr-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Asosiy rangdan shaffof qatlam */
+            background: rgba(76, 175, 80, 0.9); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .qr-card:hover .qr-overlay {
+            opacity: 1;
+        }
+
+        .qr-overlay i {
+            color: white;
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .qr-platform {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .qr-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .qr-action {
+            /* Lavashga mos ranglardan gradient */
+            background: var(--gradient); 
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .qr-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+        }
+
+        /* Platform specific colors (saqlanib qoldi) */
+        .qr-card.telegram .qr-platform {
+            color: #0088cc;
+        }
+
+        .qr-card.telegram:hover::before {
+            background: linear-gradient(135deg, #0088cc, #0077b3);
+        }
+
+        .qr-card.instagram .qr-platform {
+            color: #E4405F;
+        }
+
+        .qr-card.instagram:hover::before {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+
+        .qr-card.youtube .qr-platform {
+            color: #FF0000;
+        }
+
+        .qr-card.youtube:hover::before {
+            background: linear-gradient(135deg, #FF0000, #cc0000);
+        }
+
+        .qr-card.facebook .qr-platform {
+            color: #1877F2;
+        }
+
+        .qr-card.facebook:hover::before {
+            background: linear-gradient(135deg, #1877F2, #166fe5);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .qr-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .qr-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .qr-card img {
+                width: 140px;
+                height: 140px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .qr-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .qr-card img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        /* Additional styling for demo */
+        .demo-info {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .download-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .qr-card:hover .download-btn {
+            opacity: 1;
+        }
+
+        .download-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding-top: 60px; /* Header uchun joy */
+        }
+
+        /* Social Links Header */
+        .social-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .social-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 25px;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            background-color: rgba(76, 175, 80, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .social-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 2px;
+            left: 50%;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .social-links a:hover::after {
+            width: 80%;
+        }
+
+        .social-links i {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover i {
+            transform: scale(1.2);
+        }
+
+        /* Har bir ijtimoiy tarmoq uchun rang */
+        .social-links a[href*="telegram"]:hover {
+            color: #0088cc;
+        }
+
+        .social-links a[href*="telegram"]:hover::after {
+            background: #0088cc;
+        }
+
+        .social-links a[href*="instagram"]:hover {
+            color: #E4405F;
+        }
+
+        .social-links a[href*="instagram"]:hover::after {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+
+        .social-links a[href*="youtube"]:hover {
+            color: #FF0000;
+        }
+
+        .social-links a[href*="youtube"]:hover::after {
+            background: #FF0000;
+        }
+
+        .social-links a[href*="facebook"]:hover {
+            color: #1877F2;
+        }
+
+        .social-links a[href*="facebook"]:hover::after {
+            background: #1877F2;
+        }
+
+        .social-links a[href*="maps"]:hover {
+            color: #4285F4;
+        }
+
+        .social-links a[href*="maps"]:hover::after {
+            background: #4285F4;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .social-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+            
+            .social-links a {
+                font-size: 13px;
+                padding: 6px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .social-nav {
+                padding: 10px 20px;
+            }
+        }
+
+        /* Demo content */
+        .demo-content {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .demo-content h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .demo-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Scroll effect */
+        .social-header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .phone-select:focus + .dropdown-arrow {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        /* Custom option styling for modern browsers */
+        .phone-select option {
+            padding: 10px;
+            background: white;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .phone-select option:hover {
+            background: #f8f9fa;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .phone-select {
+                min-width: 180px;
+                font-size: 13px;
+                padding: 10px 40px 10px 35px;
+            }
+        }
+        .phone-selector {
+            position: relative;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .phone-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 12px 45px 12px 40px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+            min-width: 200px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .phone-select:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 20px rgba(76, 175, 80, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .phone-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .phone-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 16px;
+            pointer-events: none;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                /* Brendga mos rang */
+                background: linear-gradient(135deg, #388E3C 0%, #4CAF50 100%); 
+                flex-direction: column;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-link {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 15px 24px;
+                text-align: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero {
+                margin-top: 140px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0;
+            flex: 1;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 20px 24px;
+            display: block;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ecf0f1;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .action-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        .action-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+
+        /* Hover effects */
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            /* Brendga mos ranglar */
+            background: linear-gradient(90deg, #FF9800, #F44336); 
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+        .main-header {
+            /* Brendga mos ranglar */
+            background: linear-gradient(135deg, #388E3C 0%, #4CAF50 100%); 
+            padding: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 10px;
+        }
+        section img{
+            border-radius: 50%;
+            width: 90px;
+        }
+    </style>
+</head>
+<body>
+   
+    
+    <div style="height: 90px;"></div> 
+
+    <div class="container">
+        <section class="qr-section">
+           <h1 style="color: red;" style="margin-left: 20px;" ><a style="text-decoration: none; color: red;" href="index.html">← Orqaga</a></h1>
+            <h2 class="section-title fade-in">Lavashkattaqorg'an bilan bog'lanish uchun</h2>
+            <p class="demo-info fade-in">QR kodlarni skanerlash orqali bizning ijtimoiy tarmoqlarimizga o'ting</p>
+            
+            <div class="qr-grid">
+                <div class="qr-card telegram fade-in">
+                    <div class="qr-image-container">
+                        <img src="img/qr code-1.png" alt="Telegram QR">
+                        <div class="qr-overlay" onclick="window.open('https://t.me/lavash_uz_N', '_blank')">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <button class="download-btn" onclick="downloadQR('telegram')" title="Yuklab olish">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <h3 class="qr-platform">
+                        <i class="fab fa-telegram"></i> Telegram
+                    </h3>
+                    <p class="qr-description">Bizning rasmiy Telegram kanalimiz</p>
+                    <a href="https://t.me/lavash_uz_N" target="_blank" class="qr-action">
+                        Kanalga o'tish
+                    </a>
+                </div>
+
+                <div class="qr-card instagram fade-in">
+                    <div class="qr-image-container">
+                        <img src="img/instagram.png" alt="Instagram QR">
+                        <div class="qr-overlay" onclick="window.open('https://www.instagram.com/lavash_kattakurgan?igsh=MXM2YTJ6aWtxNTM0bg==', '_blank')">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <button class="download-btn" onclick="downloadQR('instagram')" title="Yuklab olish">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <h3 class="qr-platform">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </h3>
+                    <p class="qr-description">Bizning Instagram sahifamiz</p>
+                    <a target="_blank" href="https://www.instagram.com/lavash_kattakurgan?igsh=MXM2YTJ6aWtxNTM0bg==" target="_blank" class="qr-action">
+                        Sahifaga o'tish
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        // Scroll effect for header
+        window.addEventListener('scroll', () => {
+            const socialHeader = document.querySelector('.main-header'); // .main-header ni ishlatdim
+            
+            if (window.scrollY > 50) {
+                socialHeader.classList.add('scrolled');
+            } else {
+                socialHeader.classList.remove('scrolled');
+            }
+        });
+
+        // Click analytics (optional)
+        document.querySelectorAll('.nav-links a, .qr-action').forEach(link => {
+            link.addEventListener('click', function() {
+                const platform = this.href.includes('telegram') ? 'Telegram' :
+                               this.href.includes('instagram') ? 'Instagram' :
+                               this.href.includes('youtube') ? 'YouTube' :
+                               this.href.includes('facebook') ? 'Facebook' :
+                               this.href.includes('maps') ? 'Maps' : 'Unknown';
+                
+                console.log(`${platform} ga o'tildi`);
+                // Bu yerda analytics kodi qo'shishingiz mumkin
+            });
+        });
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // QR Code download function
+        function downloadQR(platform) {
+            const urls = {
+                // Eslatma: QR kod manzilidagi 'data' qiymatlarini o'zgartirish kerak
+                telegram: 'https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https://t.me/degrizuz&bgcolor=ffffff&color=000000&margin=1',
+                instagram: 'https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https://www.instagram.com/degriz.uz&bgcolor=ffffff&color=000000&margin=1',
+                youtube: 'https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https://youtube.com/@degrizkanali&bgcolor=ffffff&color=000000&margin=1',
+                facebook: 'https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https://www.facebook.com/share/1LBJMj2EYb/&bgcolor=ffffff&color=000000&margin=1'
+            };
+
+            const link = document.createElement('a');
+            link.href = urls[platform];
+            link.download = `lavashuz_${platform}_qr.png`; // Fayl nomi o'zgartirildi
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // QR Card click analytics
+        document.querySelectorAll('.qr-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.closest('.download-btn') && !e.target.closest('.qr-action')) {
+                    const platform = this.className.split(' ')[1];
+                    console.log(`${platform} QR kodi bosildi`);
+                }
+            });
+        });
+
+        // Add ripple effect on card click
+        document.querySelectorAll('.qr-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                const ripple = document.createElement('div');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    /* Asosiy rang shaffofligi */
+                    background: rgba(76, 175, 80, 0.3); 
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+         // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+         document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navMenu').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

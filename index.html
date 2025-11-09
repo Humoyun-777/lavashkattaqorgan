@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/image.png">
+    <title>Lavash.uz | Uzbekistan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #1a1a1a;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a7c2a 0%, #2a9c3a 100%);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #e74c3c;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            letter-spacing: 2px;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .cart-btn {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+        
+        .login-btn {
+            background: transparent;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 8px 15px;
+            transition: all 0.3s;
+        }
+        
+        .login-btn:hover {
+            color: #e74c3c;
+        }
+        
+        .categories-section {
+            background: #fff;
+            padding: 30px 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .category-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .category-item:hover {
+            background: #fff;
+            border-color: #e74c3c;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.2);
+        }
+        
+        .category-icon {
+            font-size: 32px;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .category-name {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.15);
+            transform: translateY(-5px);
+            border-color: #e74c3c;
+        }
+        
+        .product-card-yellow {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: #333;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 180px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+        
+        .add-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .add-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+        
+        .product-price {
+            color: #e74c3c;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        .product-name {
+            color: #333;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+            border-left: 5px solid #e74c3c;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #e74c3c;
+            margin-top: 30px;
+        }
+
+        footer {
+            background: #000;
+            padding: 40px 20px;
+            margin-top: 40px;
+            border-top: 3px solid #e74c3c;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .footer-link {
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .footer-link:hover {
+            color: #c0392b;
+        }
+
+        .footer-contact {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .footer-time {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: #666;
+            font-size: 12px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #e74c3c;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.2);
+        }
+
+        .sidebar {
+            position: fixed;
+            left: -300px;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            transition: left 0.3s ease;
+            z-index: 200;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a7c2a 0%, #2a9c3a 100%);
+            color: white;
+        }
+
+        .sidebar-header h3 {
+            font-size: 18px;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .close-btn {
+            font-size: 28px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            padding: 0;
+            transition: all 0.3s;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 15px 20px;
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover {
+            background: #f5f5f5;
+            color: #e74c3c;
+            padding-left: 30px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 150;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .container {
+            padding: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menyu</h3>
+            <button class="close-btn" id="closeSidebar">✕</button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="filal.html">Filiallar</a></li>
+            <li><a href="malumot.html">Ma'lumot</a></li>
+            <li><a href="boglanish.html">Bog'lanish</a></li>
+        </ul>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="header">
+        <div class="header-left">
+            <div class="menu-icon" id="menuIcon">☰</div>
+            <img style="width: 100px;" src="img/image.png" alt="">
+        </div>
+        <div class="header-right">
+            <button class="cart-btn" id="cartBtn">🛒 Savat</button>
+        </div>
+    </div>
+    <div style="text-align: center;" class="container" style="flex: 1; max-width: 300px; margin: 0 10px;">
+            <input type="text" id="searchInput" placeholder="Qidirish...">
+        </div>
+    <div style="flex-wrap: wrap;" class="categories-section">
+        <div class="categories-grid">
+            <div class="category-item">
+                <div class="category-icon">🍔</div>
+                <div class="category-name"><a style="color: black; text-decoration: none;" href="#burger">Burgerlar</a></div>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">🌭</div>
+                <div class="category-name"><a style="color: black; text-decoration: none;" href="#hotdog">Hot-doglar</a></div>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">🌯</div>
+                <div class="category-name"><a style="color: black; text-decoration: none;" href="#lavash">Lavash/Roll</a></div>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">🍕</div>
+                <div class="category-name"><a style="color: black; text-decoration: none;" href="#pitsa">Pitsa</a></div>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">🍟</div>
+                <div class="category-name"><a style="color: black; text-decoration: none;" href="#sneks">Sneklar</a></div>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">🥤</div>
+                <div class="category-name"><a style="color: black; text-decoration: none;" href="#combo">Kombo</a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PITSA SECTION -->
+    <div class="categories-section" id="pitsa">
+        <h2>🍕 Pitsa</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">🍕</div>
+                <div class="product-name">Qirol</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Siri mosarella, pomidor, go'shtli mol, tovuq, kolbasa pepperoni, doktorskaya, qo'ziqorin</div>
+                <div class="product-price">30 sm - 82,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🍕</div>
+                <div class="product-name">Go'shtli</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Siri mosarella, go'sht mol, tovuq, pomidor, pyoz</div>
+                <div class="product-price">30 sm - 85,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🍕</div>
+                <div class="product-name">Dastarxan</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Sous, balgar, kukuruzа, go'shtli mol, shampiynon, pomidor, olivki</div>
+                <div class="product-price">30 sm - 60,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🍕</div>
+                <div class="product-name">Pepperoni</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Pomidor sousi, siri mosarella, kolbasa</div>
+                <div class="product-price">30 sm - 68,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🍕</div>
+                <div class="product-name">Vetchina va qo'ziqorin</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Siri mosarella, kurka, sous, shampinyoni qo'ziqorini</div>
+                <div class="product-price">30 sm - 63,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🍕</div>
+                <div class="product-name">4 Fasl</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Sous, siri mosarella, kolbasa, kapchonnaya, varyonnaya, shampinyon, pomidor</div>
+                <div class="product-price">30 sm - 57,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BURGER SECTION -->
+    <div class="categories-section" id="burger">
+        <h2>🍔 Burgerlar</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">🍔</div>
+                <div class="product-name">Chicken Burger</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Qazziq mol gusht, sabzavot, sous</div>
+                <div class="product-price">23,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LAVASH/ROLL SECTION -->
+    <div class="categories-section" id="lavash">
+        <h2>🌯 Lavash / Roll</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">🌯</div>
+                <div class="product-name">Lavash standart</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Gusht, sabzavot, sous</div>
+                <div class="product-price">32,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🌯</div>
+                <div class="product-name">Lavash pishloqli</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Pishloq, gusht, sabzavot</div>
+                <div class="product-price">36,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🌯</div>
+                <div class="product-name">Lavash mini</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Kichik lavash, gusht, sabzavot</div>
+                <div class="product-price">24,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🌯</div>
+                <div class="product-name">Shaurma kalta</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Tovuq gushti, sabzavot, sous</div>
+                <div class="product-price">28,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🌯</div>
+                <div class="product-name">Shaurma kichik</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Kichik shaurma, sabzavot</div>
+                <div class="product-price">22,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥙</div>
+                <div class="product-name">Pita</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Klassik pita, sabzavot</div>
+                <div class="product-price">30,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SNACKS SECTION -->
+    <div class="categories-section" id="sneks">
+        <h2>🍟 Sneklar</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">🍟</div>
+                <div class="product-name">Fri derevenskiy</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Qo'l bilan kesib olingan kartoshka</div>
+                <div class="product-price">15,000 - 16,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🍟</div>
+                <div class="product-name">Fri</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Oddiy fri kartoshka</div>
+                <div class="product-price">15,000 - 16,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🍗</div>
+                <div class="product-name">Strips</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Tovuq go'shtining chiziqlari</div>
+                <div class="product-price">20,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🍗</div>
+                <div class="product-name">Naggets (4ta)</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">To'rt dona tovuq nuggets</div>
+                <div class="product-price">10,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🍗</div>
+                <div class="product-name">Naggets (8ta)</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Sakkiz dona tovuq nuggets</div>
+                <div class="product-price">18,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥪</div>
+                <div class="product-name">Club Sandwich</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Klassik klub sendvich</div>
+                <div class="product-price">35,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOT DOGS SECTION -->
+    <div class="categories-section" id="hotdog">
+        <h2>🌭 Hot-doglar</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">🌭</div>
+                <div class="product-name">Sub</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Klassik sub sendvich</div>
+                <div class="product-price">24,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🌭</div>
+                <div class="product-name">Sub pishloqli</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Pishloq bilan sub</div>
+                <div class="product-price">28,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🌭</div>
+                <div class="product-name">Columbia</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Kolumbiya usuli hot-dog</div>
+                <div class="product-price">35,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMBO SECTION -->
+    <div class="categories-section" id="combo">
+        <h2>🥤 Kombo Paketlar</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">📦</div>
+                <div class="product-name">Combo 1</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Lavash, fri, ichimlik</div>
+                <div class="product-price">48,000 - 55,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">📦</div>
+                <div class="product-name">Combo 2</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Shaurma, fri, ichimlik</div>
+                <div class="product-price">46,000 - 51,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">📦</div>
+                <div class="product-name">Oilaviy Combo 1</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">2 lavash, fri, 2 ichimlik</div>
+                <div class="product-price">185,000 - 206,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">📦</div>
+                <div class="product-name">Oilaviy Combo 2</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">2 shaurma, fri, 2 ichimlik</div>
+                <div class="product-price">175,000 - 194,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">📦</div>
+                <div class="product-name">Combo Do'stlar 1</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Lavash, fri, 2 ichimlik</div>
+                <div class="product-price">95,000 - 140,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">📦</div>
+                <div class="product-name">Combo Do'stlar 2</div>
+                <div style="font-size: 12px; color: #666; margin-top: 8px;">Shaurma, fri, 2 ichimlik</div>
+                <div class="product-price">88,000 - 102,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DRINKS SECTION -->
+    <div class="categories-section" id="ichimliklar">
+        <h2>🥤 Ichimliklar</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">🥤</div>
+                <div class="product-name">Razlif pepsi</div>
+                <div class="product-price">8,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥤</div>
+                <div class="product-name">Razlif mirinda</div>
+                <div class="product-price">8,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥤</div>
+                <div class="product-name">Razlif Mountain DEW</div>
+                <div class="product-price">8,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥤</div>
+                <div class="product-name">Pepsi 0.5l</div>
+                <div class="product-price">7,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥤</div>
+                <div class="product-name">Pepsi 1l</div>
+                <div class="product-price">12,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥤</div>
+                <div class="product-name">Pepsi 1.5l</div>
+                <div class="product-price">16,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🍵</div>
+                <div class="product-name">Fuse tea 0.5l</div>
+                <div class="product-price">8,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🍵</div>
+                <div class="product-name">Fuse tea 1.0l</div>
+                <div class="product-price">12,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥛</div>
+                <div class="product-name">Suv family 0.5l</div>
+                <div class="product-price">3,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥛</div>
+                <div class="product-name">Suv family 1.0l</div>
+                <div class="product-price">5,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥤</div>
+                <div class="product-name">Sokcha</div>
+                <div class="product-price">4,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🥤</div>
+                <div class="product-name">Sok</div>
+                <div class="product-price">15,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🍹</div>
+                <div class="product-name">Mohito</div>
+                <div class="product-price">15,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ISSIQ ICHIMLIKLAR SECTION -->
+    <div class="categories-section" id="issiq-ichimliklar">
+        <h2>☕ Issiq ichimliklar</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">☕</div>
+                <div class="product-name">Choy</div>
+                <div class="product-price">4,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">☕</div>
+                <div class="product-name">Limon choy</div>
+                <div class="product-price">7,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">☕</div>
+                <div class="product-name">Kofe qora</div>
+                <div class="product-price">7,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">☕</div>
+                <div class="product-name">Kofe 3/1</div>
+                <div class="product-price">8,000 UZS</div>
+                <button class="add-btn">Qo'shish</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-logo">LAVASH.UZ</div>
+                </div>
+                <div>
+                    <div class="footer-link"><a style="color:#e74c3c; text-decoration: none;" href="#burger">Burgerlar</a></div>
+                    <div class="footer-link"><a style="color:#e74c3c; text-decoration: none;" href="#pitsa">Pitsa</a></div>
+                </div>
+                <div>
+                    <div class="footer-link"><a style="color:#e74c3c; text-decoration: none;" href="#sneks">Sneklar</a></div>
+                    <div class="footer-link"><a style="color:#e74c3c; text-decoration: none;" href="#combo">Kombo</a></div>
+                </div>
+                <div>
+                    <div class="footer-contact">+998 91 200 6262</div>
+                    <div class="footer-time">Har kuni 10:00 dan 22:00 gacha</div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-text">© 2025. Barcha huquqlar himoyalangan.</div>
+                <div class="footer-text">https://t.me/burgersuz_bot</div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const cartBtn = document.getElementById('cartBtn');
+    const allAddBtns = document.querySelectorAll('.add-btn');
+    const mainContent = document.querySelector('body');
+    const header = document.querySelector('.header');
+    const footer = document.querySelector('footer');
+
+    let cart = [];
+
+    function saveCart() {
+        updateCartButtonCount();
+    }
+
+    function updateCartButtonCount() {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartBtn.textContent = `🛒 Savat (${totalItems})`;
+    }
+
+    function parsePrice(priceText) {
+        return parseInt(priceText.replace(/[^0-9]/g, '')) || 0;
+    }
+
+    function getAllProducts() {
+        const products = [];
+        document.querySelectorAll('.product-card').forEach(card => {
+            const name = card.querySelector('.product-name')?.textContent || '';
+            const priceText = card.querySelector('.product-price')?.textContent || '';
+            const price = parsePrice(priceText);
+            const category = card.closest('.categories-section')?.querySelector('h2')?.textContent || '';
+            
+            products.push({
+                name: name.trim(),
+                price: price,
+                priceText: priceText.trim(),
+                category: category.trim(),
+                element: card
+            });
+        });
+        return products;
+    }
+
+    function performSearch(query) {
+        if (!query.trim()) {
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.style.display = 'block';
+            });
+            document.querySelectorAll('.categories-section').forEach(section => {
+                section.style.display = 'block';
+            });
+            document.querySelectorAll('.categories-section h2, .categories-section h3').forEach(header => {
+                header.style.display = 'block';
+            });
+            return;
+        }
+        
+        const lowerQuery = query.toLowerCase();
+        const products = getAllProducts();
+        
+        products.forEach(product => {
+            const nameMatch = product.name.toLowerCase().includes(lowerQuery);
+            const priceMatch = product.priceText.toLowerCase().includes(lowerQuery);
+            const categoryMatch = product.category.toLowerCase().includes(lowerQuery);
+            
+            if (nameMatch || priceMatch || categoryMatch) {
+                product.element.style.display = 'block';
+            } else {
+                product.element.style.display = 'none';
+            }
+        });
+
+        document.querySelectorAll('.categories-section').forEach(section => {
+            const visibleProducts = section.querySelectorAll('.product-card:not([style*="display: none"])');
+            if (visibleProducts.length > 0) {
+                section.style.display = 'block';
+                section.querySelectorAll('h2, h3').forEach(header => header.style.display = 'block');
+            } else {
+                section.style.display = 'none';
+            }
+        });
+    }
+
+    searchInput.addEventListener('keyup', (event) => {
+        const query = event.target.value;
+        performSearch(query);
+    });
+
+    searchInput.addEventListener('input', (event) => {
+        const query = event.target.value;
+        performSearch(query);
+    });
+
+    function addToCart(productName, productPriceText, productPrice) {
+        const existingItem = cart.find(item => item.name === productName);
+
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({
+                name: productName,
+                price: productPrice,
+                priceText: productPriceText,
+                quantity: 1
+            });
+        }
+        saveCart();
+        alert(`"${productName}" savatga qo'shildi!`);
+        if (mainContent.classList.contains('cart-view')) {
+            renderCart();
+        }
+    }
+
+    function showProductsView() {
+        document.querySelectorAll('.categories-section').forEach(section => {
+            section.style.display = 'block';
+        });
+        
+        const cartView = document.getElementById('cartView');
+        if (cartView) {
+            cartView.remove();
+        }
+
+        mainContent.classList.remove('cart-view');
+        header.style.display = 'flex';
+        footer.style.display = 'block';
+        document.querySelector('.container').style.display = 'block';
+        cartBtn.removeEventListener('click', showProductsView);
+        cartBtn.addEventListener('click', toggleCart);
+        updateCartButtonCount();
+        
+        searchInput.value = '';
+        performSearch('');
+    }
+
+    function showCartView() {
+        document.querySelectorAll('.categories-section').forEach(section => {
+            section.style.display = 'none';
+        });
+
+        header.style.display = 'flex';
+        footer.style.display = 'none';
+        document.querySelector('.container').style.display = 'none';
+
+        let cartView = document.getElementById('cartView');
+        if (!cartView) {
+            cartView = document.createElement('div');
+            cartView.id = 'cartView';
+            cartView.classList.add('categories-section');
+            mainContent.insertBefore(cartView, footer);
+        }
+
+        mainContent.classList.add('cart-view');
+
+        cartBtn.textContent = '◀️ Menyu';
+        cartBtn.removeEventListener('click', toggleCart);
+        cartBtn.addEventListener('click', showProductsView);
+
+        renderCart();
+    }
+    
+    function toggleCart() {
+        if (mainContent.classList.contains('cart-view')) {
+            showProductsView();
+        } else {
+            showCartView();
+        }
+    }
+
+    function renderCart() {
+        const cartView = document.getElementById('cartView');
+        if (!cartView || !mainContent.classList.contains('cart-view')) {
+            return;
+        }
+
+        let html = `<h2>🛒 Savatdagi Buyurtmalar</h2>`;
+        let totalSum = 0;
+
+        if (cart.length === 0) {
+            html += `<p style="font-size: 18px; color: #555; text-align: center; padding: 40px;">Savat bo'sh. Marhamat, menyudan mahsulot tanlang!</p>`;
+        } else {
+            html += `<div class="cart-items-list" style="display: grid; gap: 15px;">`;
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                totalSum += itemTotal;
+                
+                html += `
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #fff;">
+                        <div style="flex-grow: 1;">
+                            <div style="font-weight: bold; font-size: 16px; color: #333;">${item.name}</div>
+                            <div style="font-size: 14px; color: #e74c3c;">${item.priceText} x ${item.quantity} = ${itemTotal.toLocaleString('uz-UZ')} UZS</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <button onclick="window.updateQuantity(${index}, -1)" style="background: #ccc; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold;">-</button>
+                            <span style="font-weight: bold;">${item.quantity}</span>
+                            <button onclick="window.updateQuantity(${index}, 1)" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold;">+</button>
+                            <button onclick="window.removeItem(${index})" style="background: #ff4444; color: white; border: none; padding: 8px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-left: 5px;">✕</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            
+            html += `
+                <div style="margin-top: 25px; padding-top: 15px; border-top: 2px solid #e74c3c; display: flex; justify-content: space-between; align-items: center;">
+                </div>
+                <button onclick="window.open('tel:+998912006262', '_self')" style="width: 100%; background: linear-gradient(135deg, #008000 0%, #00b000 100%); border: none; padding: 15px; border-radius: 8px; color: white; font-size: 16px; cursor: pointer; margin-top: 20px; font-weight: 600;">Buyurtma berish</button>
+            `;
+        }
+
+        cartView.innerHTML = html;
+        updateCartButtonCount();
+    }
+
+    window.updateQuantity = function(index, delta) {
+        if (cart[index]) {
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) {
+                window.removeItem(index);
+            } else {
+                saveCart();
+                renderCart();
+            }
+        }
+    };
+
+    window.removeItem = function(index) {
+        if (confirm(`Haqiqatan ham "${cart[index].name}" mahsulotini savatdan olib tashlamoqchimisiz?`)) {
+            cart.splice(index, 1);
+            saveCart();
+            renderCart();
+        }
+    };
+
+    allAddBtns.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const card = event.target.closest('.product-card');
+            const productName = card.querySelector('.product-name').textContent.trim();
+            const productPriceText = card.querySelector('.product-price').textContent.trim();
+            const productPrice = parsePrice(productPriceText);
+
+            addToCart(productName, productPriceText, productPrice);
+        });
+    });
+
+    cartBtn.addEventListener('click', toggleCart);
+
+    const menuIcon = document.getElementById('menuIcon');
+    const sidebar = document.getElementById('sidebar');
+    const closeSidebar = document.getElementById('closeSidebar');
+    const overlay = document.getElementById('overlay');
+
+    menuIcon.addEventListener('click', () => {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+    });
+
+    closeSidebar.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+
+    overlay.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    });
+
+    document.querySelectorAll('.sidebar-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            showProductsView();
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', updateCartButtonCount);
+</script>

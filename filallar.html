@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESKO - Filiallar (Yaxshilangan)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #c41e1e;
+            --secondary-color: #f5f5f5;
+            --text-dark: #333;
+            --text-light: #666;
+            --border-color: #ddd;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--secondary-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* --- Header Styling --- */
+        header {
+            background-color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .header-back { 
+            font-size: 14px; 
+            font-weight: 500;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .header-back:hover { color: var(--primary-color); }
+
+        /* --- Breadcrumb --- */
+        .breadcrumb {
+            padding: 20px;
+            color: var(--text-light);
+            font-size: 13px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .breadcrumb a { 
+            color: var(--primary-color); 
+            text-decoration: none; 
+            font-weight: 500;
+        }
+
+        /* --- Main Layout --- */
+        .container-title {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .container-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+        
+        .main-content {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 25px;
+            padding: 0 20px 40px;
+        }
+        
+        .left-panel {
+            flex: 0 0 450px; /* Kichikroq kenglik */
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .right-panel {
+            flex: 1;
+            min-height: 600px;
+            background: #e9e5db; /* Xaritaga yaqinroq fon */
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 16px;
+            text-align: center;
+            /* Haqiqiy xarita ko'rinishini taqlid qilish */
+            background-image: linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+                              linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+                              linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+                              linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            position: relative;
+        }
+        .map-placeholder-text {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* --- Search & Branch Card --- */
+        .search-box {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: var(--text-dark);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .search-box:focus { border-color: var(--primary-color); }
+
+        .branch-card {
+            border: 1px solid var(--primary-color); /* Asosiy rang bilan ajratib turish */
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            background: #fffafa; /* Yengilroq fon */
+            transition: all 0.3s ease;
+        }
+        .branch-card:hover {
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .branch-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .branch-address {
+            color: var(--text-light);
+            font-size: 13px;
+            margin-bottom: 15px;
+            padding-left: 2px;
+        }
+        .branch-info {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .branch-info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .branch-info span {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-base {
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .btn-route {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+        .btn-route:hover { background-color: #a01818; }
+        
+        .btn-more {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+        }
+        .btn-more:hover { background-color: var(--secondary-color); border-color: var(--primary-color); }
+
+        /* --- Footer Styling --- */
+        .footer {
+            background-color: white;
+            padding: 40px 20px 20px;
+            border-top: 1px solid #eee;
+        }
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap; /* Mobil uchun */
+        }
+        .footer-logo-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        .footer-logo img { width: 45px; border-radius: 6px; }
+
+        .footer-links { 
+            display: flex;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        .footer-link-column {
+            min-width: 120px;
+        }
+        .footer-link-column h3 { 
+            color: var(--primary-color); 
+            font-weight: 700; 
+            margin-bottom: 12px; 
+            font-size: 15px; 
+        }
+        .footer-link-column a { 
+            display: block; 
+            color: var(--text-dark); 
+            text-decoration: none; 
+            font-size: 13px; 
+            margin-bottom: 8px; 
+            cursor: pointer; 
+            transition: color 0.3s;
+        }
+        .footer-link-column a:hover { color: var(--primary-color); }
+        
+        .footer-contact { text-align: right; }
+        .footer-phone { 
+            color: var(--primary-color); 
+            font-size: 20px;
+            font-weight: 700; 
+            margin-bottom: 5px; 
+        }
+        .footer-hours { 
+            color: var(--text-light); 
+            font-size: 13px; 
+            font-style: italic;
+        }
+        
+        .copyright {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 12px;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            margin-top: 25px;
+        }
+
+        /* --- Mobile Responsive (768px dan kichik ekranlar uchun) --- */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                padding: 0 15px 30px;
+            }
+            
+            .left-panel {
+                flex: 1 1 auto;
+                order: 2; /* Telefonlarda xarita pastda bo'ladi */
+                padding: 15px;
+            }
+
+            .right-panel {
+                min-height: 300px; /* Telefonlarda xarita balandligi kamroq */
+                order: 1; /* Telefonlarda xarita yuqorida bo'ladi */
+                margin-bottom: 20px;
+            }
+
+            .container-title {
+                padding: 0 15px;
+            }
+
+            .branch-title {
+                font-size: 18px;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .btn-base {
+                width: 100%;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .footer-contact {
+                text-align: left;
+                width: 100%;
+                order: -1; /* Telefonlarda kontakt ma'lumoti yuqoriroq */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a class='header-back' href='/'>
+             &#x2190; Orqaga
+         </a>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="#">Bosh sahifa</a> / <span>Filiallar</span>
+    </div>
+
+    <div class="container-title">
+        <h1>📍 Filiallar ro'yxati</h1>
+    </div>
+
+    <div class="main-content">
+        <div class="left-panel">
+            <input type="text" class="search-box" placeholder="Manzil yoki hudud bo'yicha qidirish">
+            
+            <div class="branch-card">
+                <div class="branch-title">
+                    <img style="width: 20px;" src="https://img.icons8.com/material-rounded/24/c41e1e/marker.png" alt="marker"/>
+                    Kattaqo‘rg‘on filiali
+                </div>
+                <div class="branch-address">
+                  Kattaqo‘rg‘on, Samarqand viloyati, Узбекистан
+                </div>
+                <div class="branch-info">
+                    <div class="branch-info-item">
+                        <img style="width: 16px;" src="https://img.icons8.com/material-sharp/24/666/time.png" alt="clock"/>
+                        Ish vaqti: <span>Har kuni 8:00 - 3:00</span>
+                    </div>
+                    <div class="branch-info-item">
+                        <img style="width: 16px;" src="https://img.icons8.com/material-sharp/24/666/phone.png" alt="phone"/>
+                        Telefon: <span>+998 91 709 11 12</span>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn-base btn-route">Marshrutni qurish</button>
+                    <button class="btn-base btn-more">Batafsil</button>
+                </div>
+            </div>
+            
+            
+        </div>
+
+        <div class="right-panel">
+            <div class="map-placeholder-text">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.707075250452!2d66.26343507580063!3d39.90319017152671!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f4d8d004250de9d%3A0x8f492a60a5afe413!2sLavash.uz!5e0!3m2!1sru!2s!4v1762588408805!5m2!1sru!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="footer">
+        <div class="footer-content">
+             <div class="footer-contact">
+                <div class="footer-phone">+998 91 200 6262</div>
+                <div class="footer-hours">Har kuni 10:00 dan 22:00 gacha</div>
+            </div>
+            <div class="footer-links">
+                <div class="footer-link-column">
+                    <h3>Kompaniya</h3>
+                    <a href="#">Biz haqimizda</a>
+                    <a href="#">Vakansiyalar</a>
+                    <a href="#">Aksiyalar</a>
+                </div>
+                <div class="footer-link-column">
+                    <h3>Yordam</h3>
+                    <a href="#">Savol-javob</a>
+                    <a href="#">Maxfiylik siyosati</a>
+                    <a href="#">Foydalanish shartlari</a>
+                </div>
+                <div class="footer-link-column">
+                    <h3>Bog'lanish</h3>
+                    <a href="#">Filiallar</a>
+                    <a href="#">Qayta aloqa</a>
+                </div>
+            </div>
+             <div class="footer-logo-section">
+                <div class="footer-logo">
+                    <img src="img/image.png" alt="ESKO Logo">
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 ESKO. Barcha huquqlar himoyalangan.
+        </div>
+    </footer>
+</body>
+</html>
